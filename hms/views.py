@@ -3,7 +3,8 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth import login, authenticate
-from .forms import SignUpForm
+from .forms import SignUpForm, DataPasien
+from .models import dataHMS
 
 class CustomLoginView(LoginView):
 	template_name = 'accounts/login.html';
@@ -40,3 +41,23 @@ class RegisterView(View):
             return redirect('home')
         
         return render(request, self.template_name, {'form': form})
+
+
+class AdmissionView(View):
+    def get(self, request):
+        form = DataPasien(request.POST or None, request.FILES or None)
+        if request.method == 'POST':
+            if form.is_valid():
+                form.save()
+                return redirect("/")
+            pass
+        return render(request,"admission.html",{'form': form})
+
+class PatientView(View):
+    def get(self, request):
+        hasil = dataHMS.objects.all()
+        print(hasil)
+        data = {
+            'data' : hasil,
+        }   
+        return render(request, "data_pasien.html", data)  
