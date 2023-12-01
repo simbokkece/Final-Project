@@ -16,7 +16,7 @@ Including another URLconf
 from django.urls import path
 
 # import class View
-from .views import CustomLoginView, HomeView, CustomLogoutView, RegisterView, AdmissionView, PatientView
+from .views import CustomLoginView, HomeView, CustomLogoutView, RegisterView, AdmissionView, GeneralView, AllergiesView, HistoryView, PatientView
 
 urlpatterns = [
     path('login/', CustomLoginView.as_view(), name='login'),
@@ -24,5 +24,8 @@ urlpatterns = [
     path('logout/', CustomLogoutView.as_view(), name='logout'),
     path('register/', RegisterView.as_view(), name='register'),
     path('admission/', AdmissionView.as_view(), name='admission'),
+    path('general/', GeneralView.as_view(), name='general'),
+    path('allergies/', AllergiesView.as_view(), name='allergies'),
+    path('history/', HistoryView.as_view(), name='history'),
     path('patient/', PatientView.as_view(), name='patient')
 ]

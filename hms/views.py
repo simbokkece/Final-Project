@@ -15,7 +15,12 @@ class HomeView(View):
     template_name = 'accounts/home.html'
 
     def get(self, request):
-        return render(request, self.template_name)
+        hasil = dataHMS.objects.all()
+        print(hasil)
+        data = {
+            'data' : hasil,
+        }   
+        return render(request, self.template_name, data) 
 
 
 class CustomLogoutView(LogoutView):
@@ -44,15 +49,69 @@ class RegisterView(View):
 
 
 class AdmissionView(View):
-    def get(self, request):
-        form = DataPasien(request.POST or None, request.FILES or None)
+    def get(self, request, *args, **kwargs):
+        form = DataPasien(request.GET)
+        return render(request, "admission.html", {'form': form})
+    
+    def post(self, request, *args, **kwargs):
+        # form = DataPasien(request.POST or None, request.FILES or None)
+        form = DataPasien(request.POST)
         if request.method == 'POST':
             if form.is_valid():
                 form.save()
-                return redirect("/")
+                return redirect("/home")
             pass
-        return render(request,"admission.html",{'form': form})
+        return render(request, "admission.html", {'form': form})
 
+
+class GeneralView(View):
+    def get(self, request, *args, **kwargs):
+        form = DataPasien(request.GET)
+        return render(request, "general.html", {'form': form})
+    
+    def post(self, request, *args, **kwargs):
+        # form = DataPasien(request.POST or None, request.FILES or None)
+        form = DataPasien(request.POST)
+        if request.method == 'POST':
+            if form.is_valid():
+                form.save()
+                return redirect("/home")
+            pass
+        return render(request, "admission.html", {'form': form})
+
+
+class AllergiesView(View):
+    def get(self, request, *args, **kwargs):
+        form = DataPasien(request.GET)
+        return render(request, "allergies.html", {'form': form})
+    
+    def post(self, request, *args, **kwargs):
+        # form = DataPasien(request.POST or None, request.FILES or None)
+        form = DataPasien(request.POST)
+        if request.method == 'POST':
+            if form.is_valid():
+                form.save()
+                return redirect("/home")
+            pass
+        return render(request, "admission.html", {'form': form})
+
+
+class HistoryView(View):
+    def get(self, request, *args, **kwargs):
+        form = DataPasien(request.GET)
+        return render(request, "history.html", {'form': form})
+    
+    def post(self, request, *args, **kwargs):
+        # form = DataPasien(request.POST or None, request.FILES or None)
+        form = DataPasien(request.POST)
+        if request.method == 'POST':
+            if form.is_valid():
+                form.save()
+                return redirect("/home")
+            pass
+        return render(request, "admission.html", {'form': form})
+
+        
 class PatientView(View):
     def get(self, request):
         hasil = dataHMS.objects.all()

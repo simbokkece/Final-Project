@@ -32,12 +32,18 @@
 				</tr>
 			</thead>
 			<tbody>
-                {% for mahasiswa in data %}
+                {% for pasien in data %}
 				<tr>				
-					<td>{{mahasiswa.npm}}</td>
-					<td>{{mahasiswa.nama}}</td>
-					<td>{{mahasiswa.tgl_lahir}}</td>
-					<td>{{mahasiswa.alamat}}</td>
+					<td>{{pasien.id}}</td>
+					<td>{{pasien.nama}}</td>
+					<td>{{pasien.tgl_lahir}}</td>
+					<td>{{pasien.alamat}}</td>
+                    <td>{{pasien.height}}</td>
+                    <td>{{pasien.weight}}</td>
+                    <td>{{pasien.gender}}</td>
+                    <td>{{pasien.tgl_masuk}}</td>
+                    <td>{{pasien.diagnosis}}</td>
+                    <td>{{pasien.bed}}</td>
                 </tr>
                 {% endfor %}
 			</tbody>
